@@ -37,34 +37,34 @@ class vc{
 	}
 	public static function base64_image($file){
 		if(!function_exists('mime_content_type')) {
-		    function mime_content_type($filename) {
-		        $mime_types = array(
-		            'png' => 'image/png',
-		            'jpe' => 'image/jpeg',
-		            'jpeg' => 'image/jpeg',
-		            'jpg' => 'image/jpeg',
-		            'gif' => 'image/gif',
-		            'bmp' => 'image/bmp',
-		            'ico' => 'image/vnd.microsoft.icon',
-		            'tiff' => 'image/tiff',
-		            'tif' => 'image/tiff',
-		            'svg' => 'image/svg+xml',
-		            'svgz' => 'image/svg+xml',
-		        );
-		        $ext = strtolower(array_pop(explode('.',$filename)));
-		        if (array_key_exists($ext, $mime_types)) {
-		            return $mime_types[$ext];
-		        }
-		        elseif (function_exists('finfo_open')) {
-		            $finfo = finfo_open(FILEINFO_MIME);
-		            $mimetype = finfo_file($finfo, $filename);
-		            finfo_close($finfo);
-		            return $mimetype;
-		        }
-		        else {
-		            return 'application/octet-stream';
-		        }
-		    }
+			function mime_content_type($filename) {
+				$mime_types = array(
+					'png' => 'image/png',
+					'jpe' => 'image/jpeg',
+					'jpeg' => 'image/jpeg',
+					'jpg' => 'image/jpeg',
+					'gif' => 'image/gif',
+					'bmp' => 'image/bmp',
+					'ico' => 'image/vnd.microsoft.icon',
+					'tiff' => 'image/tiff',
+					'tif' => 'image/tiff',
+					'svg' => 'image/svg+xml',
+					'svgz' => 'image/svg+xml',
+				);
+				$ext = strtolower(array_pop(explode('.',$filename)));
+				if (array_key_exists($ext, $mime_types)) {
+					return $mime_types[$ext];
+				}
+				elseif (function_exists('finfo_open')) {
+					$finfo = finfo_open(FILEINFO_MIME);
+					$mimetype = finfo_file($finfo, $filename);
+					finfo_close($finfo);
+					return $mimetype;
+				}
+				else {
+					return 'application/octet-stream';
+				}
+			}
 		}
 		$data = file_get_contents($file);
 		$type=mime_content_type($file);
