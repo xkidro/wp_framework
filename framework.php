@@ -1,6 +1,6 @@
 <?php 
 class vc{
-	public function cache($k,$time="+1 hour",$v=NULL){
+	public static function cache($k,$time="+1 hour",$v=NULL){
 		if($v===NULL){
 			$time_c=get_option("cache_".$k."_time",1);
 			if(strtotime($time,$time_c)<strtotime("now")){
@@ -17,7 +17,7 @@ class vc{
 			return $ov;
 		}
 	}
-	public function img($image="",$size="full"){
+	public static function img($image="",$size="full"){
 		if(is_array($image)){
 			if($size=="full"){
 				return $image['url'];
@@ -31,11 +31,11 @@ class vc{
 			return $res[0];
 		}
 	}
-	public function video($video){
+	public static function video($video){
 		global $wp_embed;
 		return $wp_embed->run_shortcode('[embed]'.$video.'[/embed]');
 	}
-	public function base64_image($file){
+	public static function base64_image($file){
 		if(!function_exists('mime_content_type')) {
 		    function mime_content_type($filename) {
 		        $mime_types = array(
