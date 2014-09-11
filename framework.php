@@ -17,4 +17,16 @@ class vc{
 			return $ov;
 		}
 	}
+	public function img($image="",$size="full"){
+		if(!$image){
+			$image=get_field('image_placeholder','options');
+		}
+		if($size=="full"){
+			return $image['url'];
+		}elseif(array_key_exists($size, $image['sizes'])){
+			return $image['sizes'][$size];
+		}else{
+			return $image['url'];
+		}
+	}
 }
