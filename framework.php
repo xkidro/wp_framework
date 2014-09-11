@@ -18,15 +18,21 @@ class vc{
 		}
 	}
 	public function img($image="",$size="full"){
-		if(!$image){
-			$image=get_field('image_placeholder','options');
-		}
-		if($size=="full"){
-			return $image['url'];
-		}elseif(array_key_exists($size, $image['sizes'])){
-			return $image['sizes'][$size];
+		if(is_array($image)){
+			if($size=="full"){
+				return $image['url'];
+			}elseif(array_key_exists($size, $image['sizes'])){
+				return $image['sizes'][$size];
+			}else{
+				return $image['url'];
+			}
 		}else{
-			return $image['url'];
+			$res=wp_get_attachment_image_src($image,$size);
+			return $res[0];
 		}
+	}
+	public function video($video){
+		global $wp_embed;
+		return $wp_embed->run_shortcode('[embed]'.$video.'[/embed]');
 	}
 }
